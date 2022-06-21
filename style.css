@@ -1,0 +1,149 @@
+body {
+    background-color: lightseagreen;
+}
+.Medium_Pizza {
+    background-color: lightsalmon;
+}
+.Large_Pizza {
+    background-color: burlywood;
+}
+.Small_Pizza {
+    background-color: palevioletred;
+}
+.footer {
+    background-color: yellow;
+    padding: 2em;
+    margin: 2em;
+    border-radius: 1em;
+    display: flex;
+}
+.side-bar {
+    flex: 1;
+}
+.Contact_Details {
+    flex: 1;
+}
+.Pizza {
+    padding: 2em;
+    margin: 2em;
+    width: 300px;
+    border-radius: 1em;
+}
+@media (min-width: 768px) {
+    .Pizza {
+        display:inline-block;
+    }
+}
+
+
+.header {
+    padding: 1em;
+    background-color: dodgerblue;
+    display: flex;
+}
+
+h1 {
+
+    padding: 1em;
+    border-radius: 0.25em;
+}
+
+.cart-box {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.cart-link {
+    link: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.cart {
+    background-color: dodgerblue;
+    padding: 1em;
+    width: 100%;
+    margin-top: -10em;
+    border-radius: 0.5em;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    text-align: center;
+    vertical-align: bottom;
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ccc;
+
+}
+
+.f1 {
+    flex: 1
+}
+
+.f3 {
+    flex: 3;
+}
+
+.message {
+    padding: 1em;
+    font-weight: bold;
+    background-color: gold;
+}
+
+.input {
+    padding: 1em;
+}
+
+.btn {
+    padding: 1em 0em 1em 0em;
+    width: 5em;
+    background-color: gold;
+    color: grey;
+    font-weight: bold;
+    border: 0;
+    cursor: pointer;
+    border-radius: 0.25em;
+}
+
+.buy {
+    width: 7em;
+    margin-bottom: 1em;
+}
+
+@media (min-width: 768px) {
+    .cupcakes {
+        display: flex;
+    }
+
+    .cart {
+        width: 25%;
+    }
+
+} 
+.perfect{
+    background-color: blueviolet;
+    width: 15em;
+    padding: 1em;
+    border-radius: 2.5em;
+    font-size: larger;
+}
+
+.f6{
+    background-color: blueviolet;
+    width: 15em;
+    padding: 1em;
+    border-radius: 2.5em;
+    font-size: xx-large;
+}
