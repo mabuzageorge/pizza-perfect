@@ -18,13 +18,47 @@
 		MediumQuantity : 0,
 		LargeTotal : 0,
 		LargeQuantity : 0, 
+		payNow : false,
+		
+
+
 		cartTotal() {
 			return this.SmallTotal + this.MediumTotal + this.LargeTotal
 		},
 
 		quantityTotal() {
 			return this.SmallQuantity + this.MediumQuantity + this.LargeQuantity
-		}
+		},
+
+		buyMediumP() {
+			this.MediumTotal +=109.99; 
+			this.MediumQuantity +=1
+		},
+
+		buyMediumN() {
+			this.MediumTotal -=109.99; 
+			this.MediumQuantity -=1
+		},
+
+		buySmallP() {
+			this.SmallTotal +=67.50;
+			this.SmallQuantity +=1
+		},
+
+		buySmallN() {
+			this.SmallTotal -=67.50;
+			this.SmallQuantity -=1
+		},
+
+		buyLargeP() {
+			this.LargeTotal +=199.29;
+			this.LargeQuantity +=1
+		},
+
+		buyLargeN() {
+			this.LargeTotal -=199.29;
+			this.LargeQuantity -=1
+		},
 	}">
 
 		<div class="header" >
@@ -59,60 +93,61 @@
 				</div>
 
 				<table>
-					<tr>
+					<tr x-show="SmallQuantity>0">
 						<td>Small Pizza</td>
 						<td>
 							<span x-text="SmallQuantity"></span>
-							<button>+</button>
-							<button>-</button>
+							<button x-on:click="buySmallP()" x-show="SmallQuantity>0">+</button>
+							<button x-on:click="buySmallN()" x-show="SmallQuantity>0">-</button>
 						</td>
 						<td>
 						R<span  x-text="SmallTotal.toFixed(2)"></span>
 					</td>
 					</tr>
-					<tr>
+					<tr x-show="MediumQuantity>0">
 						<td>Medium Pizza</td>
 						<td>
 							<span x-text="MediumQuantity"></span>
-							<button>+</button>
-							<button>-</button>
+							<button x-on:click="buyMediumP()" x-show="MediumQuantity>0">+</button>
+							<button x-on:click="buyMediumN()" x-show="MediumQuantity>0">-</button>
 						</td>
 						<td>
 						R<span  x-text="MediumTotal.toFixed(2)"></span>
 					</td>
 					</tr>
-					<tr>
+					<tr x-show="LargeQuantity>0">
 						<td>Large Pizza</td>
 						<td>
 							<span x-text="LargeQuantity"></span>
-							<button>+</button>
-							<button>-</button>
+							<button x-on:click="buyLargeP()" x-show="LargeQuantity>0">+</button>
+							<button x-on:click="buyLargeN()" x-show="LargeQuantity>0">-</button>
 						</td>
 						<td>
 						R<span  x-text="LargeTotal.toFixed(2)"></span>
 					</td>
 					</tr>
-					<tr>
+					<tr x-show="cartTotal()>0">
 						<td colspan="2">Total</td>
 					</td>
-					<td>
+					<td >
 					R<span  x-text="cartTotal().toFixed(2)"></span>
 				</td>
 					</tr>
-					<tr>
+					<tr x-show="cartTotal()>0">
 						<td colspan="2">
 
+                        <div x-show="payNow">
 							<div class="message" >Message...</div>
 							<div>
 								<label for="">Payment amount</label>
 								<input class="input" type="number" placeholder="Payment amount" >
 							</div>
-
+						</div>
 						</td>
 						<td>
-							<button class="btn" >
+							<button x-on:click="payNow=true" class="btn" >
 								<img src="shopping cart.jpg" width="20" alt="">
-								Buy</button>
+								Pay</button>
 						</td>
 					</tr>
 				</table>
@@ -126,7 +161,7 @@
         <img src="https://user-images.githubusercontent.com/34037/167313951-4a866324-a3bf-4094-8bf8-8a90795957ab.png"
             width="150" alt="">
         <h3>R109.99</h3>
-        <button class="buy btn" x-on:click="MediumTotal +=109.99; MediumQuantity +=1">
+        <button class="buy btn" x-on:click="buyMediumP">
             <img src="//user-images.githubusercontent.com/34037/167313951-4a866324-a3bf-4094-8bf8-8a90795957ab.png" alt="" width="20" >
         Buy</button>
         <div>Medium Magerita Pizza with 3 toppings max</div>
@@ -136,7 +171,7 @@
         <img src="https://user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png"
             width="150" alt="">
         <h3>R199.29</h3>
-        <button class="buy btn "x-on:click="LargeTotal +=199.29; LargeQuantity +=1" >
+        <button class="buy btn "x-on:click="buyLargeP()" >
             <img src="//user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png" alt="" width="20" >
         Buy</button>
         <div>Large Magerita Pizza with 3 toppings max</div>
@@ -146,11 +181,12 @@
         <img src="https://user-images.githubusercontent.com/34037/167313951-4a866324-a3bf-4094-8bf8-8a90795957ab.png"
             width="150" alt="">
         <h3>R67.50</h3>
-        <button class="buy btn" x-on:click="SmallTotal +=67.50; SmallQuantity +=1">
+        <button class="buy btn" x-on:click="buySmallP()">
             <img src="//user-images.githubusercontent.com/34037/167313951-4a866324-a3bf-4094-8bf8-8a90795957ab.png" alt="" width="20" >
         Buy</button>
         <div>Small magerita Pizza with 2 toppings max</div>
     </div>
+	
     <div class="footer">
         <div class="Contact_Details">
             <h3>Contact Details</h3>
@@ -160,7 +196,7 @@
             <br>Pizza plaza<br>Dough Road<br>Base Town
         </div>
     </div>
-    </div>
+</div>
 </div>
 </body>
 </html>
