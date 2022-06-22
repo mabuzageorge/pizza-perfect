@@ -4,28 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>My Pizza-cart</title>
     <link rel="stylesheet" href="style.css">
+	<script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body>
 
-	<div class="container">
+	<div class="container" x-data="{
+		showCart: false,
+		SmallTotal : 0,
+		SmallQuantity : 0,
+		MediumTotal : 0,
+		MediumQuantity : 0,
+		LargeTotal : 0,
+		LargeQuantity : 0, 
+		cartTotal() {
+			return this.SmallTotal + this.MediumTotal + this.LargeTotal
+		},
+
+		quantityTotal() {
+			return this.SmallQuantity + this.MediumQuantity + this.LargeQuantity
+		}
+	}">
 
 		<div class="header" >
 			<h1 class="f3" >Perfect pizza</h1>
 			<div class="f1" >
-				<a href="" class="cart-link" >
-					<img src="shopping cart.jpg" width="30" alt="">
-					<strong>R0.00</strong>
+				
+					<button x-on:click="showCart=true">
+						<img src="shopping cart.jpg" width="30" alt="">
+						show cart
+					</button>
+					
+					<strong x-show="quantityTotal() > 0">
+						There are <span x-text="quantityTotal().toFixed()">  </span> Pizzas in the cart
+					</strong>
 				</a>
-				<!-- <span>0.00</span> -->
+				
 			</div>
 		</div>
 
 		<div class="cart-box">
-			<div class="cart" >
+			<div class="cart" x-show="showCart" >
 				<div>
-					<a href="">Close</a>
+					<button x-on:click="showCart=false">
+						<img src="shopping cart.jpg" width="30" alt="">
+						close cart
+					</button>
 				</div>
 				<div class="">
 					<h2>Cart
@@ -37,30 +62,42 @@
 					<tr>
 						<td>Small Pizza</td>
 						<td>
+							<span x-text="SmallQuantity"></span>
 							<button>+</button>
 							<button>-</button>
 						</td>
-						<td>R0.00</td>
+						<td>
+						R<span  x-text="SmallTotal.toFixed(2)"></span>
+					</td>
 					</tr>
 					<tr>
 						<td>Medium Pizza</td>
 						<td>
+							<span x-text="MediumQuantity"></span>
 							<button>+</button>
 							<button>-</button>
 						</td>
-						<td>R0.00</td>
+						<td>
+						R<span  x-text="MediumTotal.toFixed(2)"></span>
+					</td>
 					</tr>
 					<tr>
 						<td>Large Pizza</td>
 						<td>
+							<span x-text="LargeQuantity"></span>
 							<button>+</button>
 							<button>-</button>
 						</td>
-						<td>R0.00</td>
+						<td>
+						R<span  x-text="LargeTotal.toFixed(2)"></span>
+					</td>
 					</tr>
 					<tr>
 						<td colspan="2">Total</td>
-						<td>R0.00</td>
+					</td>
+					<td>
+					R<span  x-text="cartTotal().toFixed(2)"></span>
+				</td>
 					</tr>
 					<tr>
 						<td colspan="2">
@@ -89,7 +126,7 @@
         <img src="https://user-images.githubusercontent.com/34037/167313951-4a866324-a3bf-4094-8bf8-8a90795957ab.png"
             width="150" alt="">
         <h3>R109.99</h3>
-        <button class="buy btn" >
+        <button class="buy btn" x-on:click="MediumTotal +=109.99; MediumQuantity +=1">
             <img src="//user-images.githubusercontent.com/34037/167313951-4a866324-a3bf-4094-8bf8-8a90795957ab.png" alt="" width="20" >
         Buy</button>
         <div>Medium Magerita Pizza with 3 toppings max</div>
@@ -99,7 +136,7 @@
         <img src="https://user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png"
             width="150" alt="">
         <h3>R199.29</h3>
-        <button class="buy btn" >
+        <button class="buy btn "x-on:click="LargeTotal +=199.29; LargeQuantity +=1" >
             <img src="//user-images.githubusercontent.com/34037/167313920-09aeb40f-9952-439b-8e54-a04c02caa427.png" alt="" width="20" >
         Buy</button>
         <div>Large Magerita Pizza with 3 toppings max</div>
@@ -109,7 +146,7 @@
         <img src="https://user-images.githubusercontent.com/34037/167313951-4a866324-a3bf-4094-8bf8-8a90795957ab.png"
             width="150" alt="">
         <h3>R67.50</h3>
-        <button class="buy btn" >
+        <button class="buy btn" x-on:click="SmallTotal +=67.50; SmallQuantity +=1">
             <img src="//user-images.githubusercontent.com/34037/167313951-4a866324-a3bf-4094-8bf8-8a90795957ab.png" alt="" width="20" >
         Buy</button>
         <div>Small magerita Pizza with 2 toppings max</div>
