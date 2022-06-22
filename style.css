@@ -1,6 +1,9 @@
 body {
     background-color: lightseagreen;
 }
+.pizzas{
+  /*  display: flex;*/
+}
 .Medium_Pizza {
     background-color: lightsalmon;
 }
@@ -38,7 +41,7 @@ body {
 
 .header {
     padding: 1em;
-    background-color: dodgerblue;
+    background-color: rgb(75, 255, 30);
     display: flex;
 }
 
@@ -63,7 +66,7 @@ h1 {
 }
 
 .cart {
-    background-color: dodgerblue;
+    background-color: blue;
     padding: 1em;
     width: 100%;
     margin-top: -10em;
