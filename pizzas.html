@@ -19,9 +19,9 @@
 		LargeTotal : 0,
 		LargeQuantity : 0, 
 		payNow : false,
+		paymentAmount : 0,
+		paymentMessage : '',
 		
-
-
 		cartTotal() {
 			return this.SmallTotal + this.MediumTotal + this.LargeTotal
 		},
@@ -59,6 +59,32 @@
 			this.LargeTotal -=199.29;
 			this.LargeQuantity -=1
 		},
+
+		makePayment() {
+			if (this.paymentAmount === 0){
+				this.paymentMessage = 'No amount entered'
+			}
+			if (this.paymentAmount >= this.cartTotal() ){
+				this.paymentMessage = 'payment successful!'
+				
+				setTimeout(()=> {
+					this.clearCart()
+					this.payNow = false
+				}, 2000);
+				
+			}
+			else{
+				this.paymentMessage = 'payment failed!'
+			}
+		},
+		clearCart() {
+		this.SmallTotal = 0;
+		this.SmallQuantity = 0;
+		this.MediumTotal = 0;
+		this.MediumQuantity = 0;
+		this.LargeTotal = 0;
+		this.LargeQuantity = 0;
+		},
 	}">
 
 		<div class="header" >
@@ -66,7 +92,7 @@
 			<div class="f1" >
 				
 					<button x-on:click="showCart=true">
-						<img src="shopping cart.jpg" width="30" alt="">
+						<img src="shopping cart.jpg" width="50" alt="">
 						show cart
 					</button>
 					
@@ -137,17 +163,21 @@
 						<td colspan="2">
 
                         <div x-show="payNow">
-							<div class="message" >Message...</div>
+							<div class="message" x-text="paymentMessage" ></div>
 							<div>
 								<label for="">Payment amount</label>
-								<input class="input" type="number" placeholder="Payment amount" >
+								<input class="input" type="number" placeholder="Payment amount" x-model="paymentAmount" >
+								<button  x-on:click="makePayment" class="btn" >
+									<img src="shopping cart.jpg" width="20" alt="">
+									Pay</button>
 							</div>
+							
 						</div>
 						</td>
 						<td>
-							<button x-on:click="payNow=true" class="btn" >
+							<button x-show="!payNow" x-on:click="payNow=true" class="btn" >
 								<img src="shopping cart.jpg" width="20" alt="">
-								Pay</button>
+								Proceed to checkout</button>
 						</td>
 					</tr>
 				</table>
